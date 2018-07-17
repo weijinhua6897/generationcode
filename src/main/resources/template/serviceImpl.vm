@@ -1,0 +1,95 @@
+package ${serviceImplUrl};
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.List;
+import ${url};
+import ${serviceUrl}.${name}Service;
+import ${mapperUrl}.${name}Dao;
+
+@Service
+public class ${name}ServiceImpl implements ${name}Service{
+
+    private static final Logger logger = LoggerFactory.getLogger(${name}ServiceImpl.class);
+
+    @Autowired
+    private ${name}Dao mapper;
+
+    @Override
+    public ${name} get${name}(${primaryType} ${primaryKey}) {
+
+        ${name} model = mapper.selectByPrimaryKey(${primaryKey});
+        if (model == null) {
+            logger.error("[get${name}]delete ${name} ${primaryKey}={} fail", ${primaryKey});
+            throw new RuntimeException("GET data fail");
+        }
+        return model;
+
+    }
+
+    @Override
+    public void save(${name} model) {
+        int success = mapper.insertSelective(model);
+        if (success <= 0) {
+            logger.error("[add${name}]add ${name}={} fail",  model.toString());
+            throw new RuntimeException("Add data fail");
+        }
+        return;
+
+    }
+
+    @Override
+    public void update(${name} model) {
+        int success = mapper.updateByPrimaryKeySelective(model);
+        if (success <= 0) {
+            logger.error("[update${name}]update ${name}={} fail",  model.toString());
+            throw new RuntimeException("Modify data fail");
+        }
+        return;
+
+    }
+
+    @Override
+    public void del(${primaryType} ${primaryKey}) {
+
+        int success = mapper.deleteByPrimaryKey(${primaryKey});
+        if (success <= 0) {
+            logger.error("[delete${name}]delete ${name} ${primaryKey}={} fail", ${primaryKey});
+            throw new RuntimeException("Del data fail");
+        }
+        return;
+
+    }
+
+    @Override
+    public List<${name}> getListByPage(int currentPage, int itemsPerPage, HashMap<String, Object> paramMap) {
+        logger.info("currentPage:{},itemsPerPage:{},param:{}", currentPage, itemsPerPage, paramMap);
+        int start = (currentPage - 1) * itemsPerPage;
+        paramMap.put("start",start);
+        paramMap.put("itemsPerPage",itemsPerPage);
+        return mapper.getListByPage(paramMap);
+    }
+
+    @Override
+    public int getCount() {
+        return mapper.getCount();
+    }
+
+    @Override
+    public List<${name}> query(int currentPage, int itemsPerPage, HashMap<String, Object> paramMap) {
+        logger.info("currentPage:{},itemsPerPage:{},param:{}", currentPage, itemsPerPage, paramMap);
+        int start = (currentPage - 1) * itemsPerPage;
+        paramMap.put("start",start);
+        paramMap.put("itemsPerPage",itemsPerPage);
+        return mapper.query(paramMap);
+    }
+
+    @Override
+    public int queryCount(HashMap<String, Object> paramMap) {
+        return mapper.queryCount(paramMap);
+    }
+
+}

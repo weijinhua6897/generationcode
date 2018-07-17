@@ -1,0 +1,27 @@
+package ${mapperUrl};
+
+import ${url};
+import java.util.HashMap;
+import java.util.List;
+
+public interface ${name}Dao {
+
+    int deleteByPrimaryKey(${primaryType} ${primaryKey});
+
+    int insert(${name} record);
+
+    int insertSelective(${name} record);
+
+    ${name} selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(${name} record);
+
+    int updateByPrimaryKey(${name} record);
+
+    List<${name}> getListByPage(HashMap<String, Object> paramMap);
+    int getCount();
+
+    List<${name}> query(HashMap<String, Object> paramMap);
+    int queryCount(HashMap<String, Object> paramMap);
+
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="MysqlContext" targetRuntime="com.wjh.generationcode.GeneratorConfiguration.InsoIntrospectedTable" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <commentGenerator type="com.wjh.generationcode.GeneratorConfiguration.MyCommentGenerator">
+            <property name="suppressDate" value="false"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://192.168.13.81:5432/sc?charSet=utf-8" userId="postgres"
+                        password="postgres">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="test.model" targetProject="C:\soft\ideworkspace\generationcode\src\main\java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="test.xml"  targetProject="C:\soft\ideworkspace\generationcode\src\main\java"/>
+
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="test.dao"  targetProject="C:\soft\ideworkspace\generationcode\src\main\java"/>
+        <!-- 需要生成代码的表名，每个表一个table节点如下 -->
+        <table tableName="user" domainObjectName="User"/>
+
+    </context>
+</generatorConfiguration>

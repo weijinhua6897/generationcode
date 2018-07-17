@@ -1,0 +1,24 @@
+package ${serviceUrl};
+
+import java.util.HashMap;
+import java.util.List;
+import ${url};
+
+
+public interface ${name}Service {
+
+    ${name} get${name}(${primaryType} ${primaryKey});
+
+    void save(${name} model);
+
+    void update(${name} model);
+
+    void del(${primaryType} ${primaryKey});
+
+    List<${name}> getListByPage(int start, int itemsPerPage, HashMap<String, Object> paramMap);
+    int getCount();
+
+    List<${name}> query(int currentPage, int itemsPerPage, HashMap<String, Object> paramMap);
+    int queryCount(HashMap<String, Object> paramMap);
+
+}
